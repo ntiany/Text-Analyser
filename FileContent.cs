@@ -30,8 +30,7 @@ namespace TextAnalyser
 
         public string GetFileName()
         {
-            string filename = Path.Substring(Path.LastIndexOf('\\') + 1);
-            return filename;
+            return Path.Substring(Path.LastIndexOf('\\') + 1);
         }
     }
 }

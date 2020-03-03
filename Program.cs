@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace TextAnalyser
 {
@@ -7,6 +8,7 @@ namespace TextAnalyser
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
             string filename = "test_malville_moby.txt";
             FileContent file = new FileContent(filename);
             Iterator chars = file.CharIterator();
@@ -15,6 +17,8 @@ namespace TextAnalyser
             StatisticalAnalysis statForWords = new StatisticalAnalysis(words);
             bool notQuitted = true;
             string answer;
+            int occurency = 0;
+            bool valid;
             string[] wordsToCheck;
             var watch = new Stopwatch();
 
@@ -42,7 +46,7 @@ namespace TextAnalyser
                     watch.Start();
                     View.Print($"There are {statForWords.DictionarySize()} unique words and {statForWords.Size()} words altogether");
                     watch.Stop();
-                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms");
+                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms \n");
                 }
                 else if (answer == "3")
                 {
@@ -58,7 +62,7 @@ namespace TextAnalyser
                     watch.Start();
                     View.Print($"These words were repeated {statForWords.CountOf(wordsToCheck)} times \n");
                     watch.Stop();
-                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms");
+                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms \n");
                 }
                 else if (answer == "5")
                 {
@@ -66,7 +70,7 @@ namespace TextAnalyser
                     watch.Start();
                     View.Print(statForWords.Occurencies);
                     watch.Stop();
-                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms");
+                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms \n");
                 }
 
                 else if (answer == "6")
@@ -75,15 +79,49 @@ namespace TextAnalyser
                     watch.Start();
                     View.Print(statForChars.Occurencies);
                     watch.Stop();
-                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms");
+                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms \n");
+                }
+
+                else if (answer == "7")
+                {
+                    View.Print("Provide occurency: ");
+                    valid = false;
+                    while (!valid)
+                    {
+                        answer = Console.ReadLine();
+                        try
+                        {
+                            occurency = int.Parse(answer);
+                            valid = true;
+                        }
+                        catch
+                        {
+                            View.Print("Wrong input. Try again");
+                        }
+                            
+                    }
+                    watch.Start();
+                    View.Print(statForWords.OccurMoreThan(occurency));
+                    watch.Stop();
+                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms \n");
+
+
+
+                }
+
+                else if (answer == "8")
+                {
+                    notQuitted = true;
+                    View.Print("Goodbye!");
                 }
 
 
                 else
                 {
-                    View.Print("Not ready yet");
+                    View.Print("wrong command - try again \n");
                 }
 
+                watch.Reset();
 
             }
             Console.ReadKey();
