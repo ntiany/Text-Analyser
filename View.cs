@@ -26,7 +26,7 @@ namespace TextAnalyser
         static public void PrintMenu()
         {
             Console.WriteLine(" 1) Change file for analyse \n 2) check word statistics \n 3) check char statistics \n " +
-                "4) check occurencies of chosen words or chars \n 5) check occurencies of all words  \n 6) check occurencies of all chars \n 7) quit");
+                "4) check occurencies of chosen words \n 5) check occurencies of all words  \n 6) check occurencies of all chars \n 7) quit");
         }
     }
 }

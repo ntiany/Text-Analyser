@@ -19,7 +19,7 @@ namespace TextAnalyser
 
         public bool HasNext()
         {
-            return (LastIterator < TextLength-1);
+            return (LastIterator < TextLength-1 && Helper.HasNonWhiteChar(File.Content, LastIterator + 1));
         }
         public string MoveNext()
         {

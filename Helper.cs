@@ -6,21 +6,30 @@ namespace TextAnalyser
 {
     static class Helper
     {
-        public static int GetNextWhiteSpaceIndex(string text, int index)
+        public static int GetNextWhiteCharIndex(string text, int index)
         {
             while (index < text.Length)
             {
                 if (Char.IsWhiteSpace(text[index]))
-                {
                     return index;
-                }
                 else
-                {
                     index++;
-                }
             }
 
             return text.Length;
+        }
+
+        public static bool HasNonWhiteChar(string text, int index)
+        {
+            while (index < text.Length)
+            {
+                if (!Char.IsWhiteSpace(text[index]))
+                    return true;
+                else
+                    index++;
+            }
+
+            return false;
         }
     }           
 }

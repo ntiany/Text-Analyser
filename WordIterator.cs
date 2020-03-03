@@ -21,7 +21,7 @@ namespace TextAnalyser
 
         public bool HasNext()
         {
-            return (LastIterator < TextLength-1);
+            return (LastIterator < TextLength-1 && Helper.HasNonWhiteChar(File.Content, LastIterator+1));
         }
         public string MoveNext()
         {
@@ -30,7 +30,7 @@ namespace TextAnalyser
             while (HasNext())
             {
                 LastIterator++;
-                whiteSpaceIndex = Helper.GetNextWhiteSpaceIndex(File.Content, LastIterator);
+                whiteSpaceIndex = Helper.GetNextWhiteCharIndex(File.Content, LastIterator);
                 nextWord = File.Content.Substring(LastIterator, whiteSpaceIndex - LastIterator);
                 LastIterator += nextWord.Length;
                 if (nextWord.Length > 0)

@@ -7,7 +7,7 @@ namespace TextAnalyser
     {
         static void Main(string[] args)
         {
-            string filename = "test.txt";
+            string filename = "test_malville_moby.txt";
             FileContent file = new FileContent(filename);
             Iterator chars = file.CharIterator();
             Iterator words = file.WordIterator();
@@ -15,6 +15,7 @@ namespace TextAnalyser
             StatisticalAnalysis statForWords = new StatisticalAnalysis(words);
             bool notQuitted = true;
             string answer;
+            string[] wordsToCheck;
             var watch = new Stopwatch();
 
             while (notQuitted)
@@ -50,6 +51,34 @@ namespace TextAnalyser
                     watch.Stop();
                     View.Print($"Executed in {watch.ElapsedMilliseconds} ms\n");
                 }
+                else if (answer == "4")
+                {
+                    View.Print("Provide words after space");
+                    wordsToCheck = Console.ReadLine().Split(" ");
+                    watch.Start();
+                    View.Print($"These words were repeated {statForWords.CountOf(wordsToCheck)} times \n");
+                    watch.Stop();
+                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms");
+                }
+                else if (answer == "5")
+                {
+                    View.Print("The full dictionary of words: ");
+                    watch.Start();
+                    View.Print(statForWords.Occurencies);
+                    watch.Stop();
+                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms");
+                }
+
+                else if (answer == "6")
+                {
+                    View.Print("The full dictionary of chars: ");
+                    watch.Start();
+                    View.Print(statForChars.Occurencies);
+                    watch.Stop();
+                    View.Print($"Executed in {watch.ElapsedMilliseconds} ms");
+                }
+
+
                 else
                 {
                     View.Print("Not ready yet");

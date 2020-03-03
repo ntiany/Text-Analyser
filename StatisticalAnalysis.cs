@@ -38,7 +38,8 @@ namespace TextAnalyser
             int occurencies = 0;
             foreach (string word in words)
             {
-                occurencies += Occurencies[word];
+                if (Occurencies.ContainsKey(word))
+                    occurencies += Occurencies[word];
             }
 
             return occurencies;
