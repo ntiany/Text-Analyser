@@ -8,20 +8,20 @@ namespace TextAnalyser
     class WordIterator : Iterator
     {
         private FileContent File { get; set; }
-        private int LastIterator { get; set; }
+        private int LastIndex { get; set; }
         private int TextLength { get; set; }
 
 
         public WordIterator(FileContent file)
         {
             File = file;
-            LastIterator = -1;
+            LastIndex = -1;
             TextLength = File.Content.Length;
         }
 
         public bool HasNext()
         {
-            return (LastIterator < TextLength-1 && Helper.HasNonWhiteChar(File.Content, LastIterator+1));
+            return (LastIndex < TextLength-1 && Helper.HasNonWhiteChar(File.Content, LastIndex+1));
         }
         public string MoveNext()
         {
@@ -29,10 +29,10 @@ namespace TextAnalyser
             int whiteSpaceIndex;
             while (HasNext())
             {
-                LastIterator++;
-                whiteSpaceIndex = Helper.GetNextWhiteCharIndex(File.Content, LastIterator);
-                nextWord = File.Content.Substring(LastIterator, whiteSpaceIndex - LastIterator);
-                LastIterator += nextWord.Length;
+                LastIndex++;
+                whiteSpaceIndex = Helper.GetNextWhiteCharIndex(File.Content, LastIndex);
+                nextWord = File.Content.Substring(LastIndex, whiteSpaceIndex - LastIndex);
+                LastIndex += nextWord.Length;
                 if (nextWord.Length > 0)
                 return nextWord.ToLower();
 
